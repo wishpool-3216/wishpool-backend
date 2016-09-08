@@ -31,7 +31,8 @@ After adding components, run `rake bower:install`, then require the appropriate 
 | Method | Path | Description |
 | :-- | :-- | :-- |
 |  | **USER** |  |
-| POST | /auth | Creates a new account. Required params: { **user**, **password**, **password_confirmation**} |
-| POST | /auth/sign_in | Signs in a user. Required params: { **email**, **password** }. Headers will contain **access-token**, **client** and **expiry** fields required for further use |
+| POST | /auth | **UNUSED** Creates a new account. Required params: { **user**, **password**, **password_confirmation**} |
+| POST | /auth/sign_in | **UNUSED** Signs in a user. Required params: { **email**, **password** }. Headers will contain **access-token**, **client** and **expiry** fields required for further use |
+| GET | /auth/facebook/callback | Call this after hitting `FB.login` to retrieve access token in the header to continue with your session. Will also return the associated User's details in JSON format |
 | GET | /api/v1/users/:id | Gets the User associated with the given ID |
 | PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
