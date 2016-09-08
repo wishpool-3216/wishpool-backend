@@ -1,10 +1,14 @@
 require 'rails_helper'
 
+##
+# Contains Integration tests for the Users API
 RSpec.describe 'User requests', type: :request do
   fixtures :users
 
   it 'creates a new User' do
-    post '/auth', email: 'test@example.com', password: 'Password', password_confirmation: 'Password'
+    expect do
+      post '/auth', email: 'test@example.com', password: 'Password', password_confirmation: 'Password'
+    end.to change { User.count }.by(1)
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
     expect(response.headers).to have_key('access-token')
@@ -15,7 +19,9 @@ RSpec.describe 'User requests', type: :request do
   end
 
   it 'fails to create a new User' do
-    post '/auth', email: 'test@example.com', password: 'password', password_confirmation: 'Password'
+    expect do
+      post '/auth', email: 'test@example.com', password: 'password', password_confirmation: 'Password'
+    end.to_not change { User.count }
     expect(response).to have_http_status(:unprocessable_entity)
     expect(response.content_type).to eq('application/json')
     expect(response.headers).to_not have_key('access-token')
