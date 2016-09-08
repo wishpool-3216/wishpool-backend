@@ -8,7 +8,7 @@
   * `gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3`
   * `\curl -sSL https://get.rvm.io | bash -s stable --ruby`
 * Bundler.
-  * `apt-get install ruby-bundler`
+  * `gem install bundler`
 * postgres
 * Node
   * `apt-get install nodejs-legacy`
@@ -26,7 +26,13 @@ Bower components are added through `./Bowerfile`
 
 After adding components, run `rake bower:install`, then require the appropriate files to `app/assets/javascripts/application.js` and `app/assets/stylesheets/application.css` (See `application.js` require angular/angular for an example). Note: files are saved in `vendor/assets/bower_components`
 
-## API
+## Contributing
+
+#### Testing
+Tests must pass. Rails tests go in `spec/` (Using RSpec), and fixtures in 'spec/fixtures/'
+To run, just type `bundle exec rspec` from the root directory
+
+#### API
 
 | Method | Path | Description |
 | :-- | :-- | :-- |
