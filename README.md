@@ -30,5 +30,8 @@ After adding components, run `rake bower:install`, then require the appropriate 
 
 | Method | Path | Description |
 | :-- | :-- | :-- |
+|  | **USER** |  |
 | POST | /auth | Creates a new account. Required params: { **user**, **password**, **password_confirmation**} |
 | POST | /auth/sign_in | Signs in a user. Required params: { **email**, **password** }. Headers will contain **access-token**, **client** and **expiry** fields required for further use |
+| GET | /api/v1/users/:id | Gets the User associated with the given ID |
+| PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
