@@ -1,0 +1,37 @@
+<section layout="row" id="navbar" flex>
+	<!-- Body "Header" -->
+	<md-toolbar class="md-whiteframe-4dp">
+		<div class="md-toolbar-tools" layout="row">
+			<md-button ng-click="toggleSidenav()" class="md-icon-button">
+				<i class="material-icons">&#xE5D2;</i>
+			</md-button>
+		</div>
+	</md-toolbar>
+	<!-- End  -->
+
+	<!-- Actual Sidebar -->
+	<md-sidenav
+		class="md-sidenav-left"
+		md-component-id="sidenav"
+		md-is-locked-open="$mdMedia('gt-md')"
+		md-whiteframe="4">		
+
+		<!-- Sidebar "Header" -->
+		<md-toolbar class="md-theme-indigo">
+		<h1 class="md-toolbar-tools">Wishpool Navbar</h1>
+		</md-toolbar>
+		<!-- End -->
+
+		<md-list flex>
+			<md-list-item>
+				<p>Home</p>
+			</md-list-item>
+			<md-list-item>
+				<p>Friends</p>
+			</md-list-item>
+			<md-list-item>
+				<p>Logout</p>
+			</md-list-item>
+		</md-list>
+	</md-sidenav>
+</section>

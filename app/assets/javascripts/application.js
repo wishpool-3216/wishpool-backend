@@ -14,3 +14,15 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//= require angular
+//= require angular-aria
+//= require angular-animate
+//= require angular-messages
+//= require angular-material
+//= require bluebird
+//= require angular-bluebird-promises
+
+//= require main
+//= require placeholder.controller
+//= require wishpool.states
+//= require navbar.directive
