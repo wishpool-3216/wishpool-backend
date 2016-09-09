@@ -40,7 +40,6 @@ GEM
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (9.0.5)
     coffee-rails (4.1.1)
@@ -182,7 +181,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bower-rails
   byebug
   coffee-rails (~> 4.1.0)
   devise_token_auth
@@ -199,4 +197,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.5
+   1.13.0
