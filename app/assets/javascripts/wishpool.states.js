@@ -9,7 +9,7 @@ app.config(function($stateProvider){
 
 	$stateProvider.state('profile', {
 		url: '/user/:userId',
-		templateUrl: 'app/views/profile.html',
+		templateUrl: 'app/views/landing.html',
 		controller: 'placeholderCtrl'
 	})
 

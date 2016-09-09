@@ -21,8 +21,8 @@
 //= require angular-material
 //= require bluebird
 //= require angular-bluebird-promises
+//= require material-design-icons
 
 //= require main
 //= require placeholder.controller
 //= require wishpool.states
-//= require navbar.directive
