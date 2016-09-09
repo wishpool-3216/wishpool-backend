@@ -41,6 +41,8 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration
 
       ## Tokens
       t.text :tokens
+      t.string :oauth_token
+      t.datetime :oauth_expires_at
 
       t.timestamps
     end
