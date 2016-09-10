@@ -1,4 +1,4 @@
-# WishPool
+# WishPool [![Build Status](https://travis-ci.org/wishpool-3216/wishpool-backend.svg?branch=master)](https://travis-ci.org/wishpool-3216/wishpool-backend)
 
 ## WishPool Thinking - Where Your Dreams Come True
 
