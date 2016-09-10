@@ -1,0 +1,9 @@
+language: ruby
+rvm:
+  - 2.2
+services:
+  - postgresql
+before_script:
+  - bundle exec rake db:create
+script:
+  - bundle exec rspec
