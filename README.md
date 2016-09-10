@@ -10,21 +10,13 @@
 * Bundler.
   * `gem install bundler`
 * postgres
-* Node
-  * `apt-get install nodejs-legacy`
-* Bower
-  * `npm install -g bower`
 
 #### Actual setup
 * Go to your wishpool path
 * `bundle install`
 * `rake db:create db:migrate`
-* `rails s` Your server is running! Access at `localhost:3000`
-
-#### Adding components
-Bower components are added through `./Bowerfile`
-
-After adding components, run `rake bower:install`, then require the appropriate files to `app/assets/javascripts/application.js` and `app/assets/stylesheets/application.css` (See `application.js` require angular/angular for an example). Note: files are saved in `vendor/assets/bower_components`
+* `bundle exec rails s` Your server is running! Access at `localhost:3000`
+* `./launch_https` To run with SSL, then access at `https://localhost:3000`
 
 ## Contributing
 
