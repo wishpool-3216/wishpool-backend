@@ -28,6 +28,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'puma'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -36,15 +37,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise_token_auth'
 gem 'omniauth-facebook'
 
-# For Angular Support
-gem 'bower-rails'
-
 # To track who created what
 gem 'userstamp', git: 'git://github.com/insphire/userstamp.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'rspec-rails', '~> 3.5'
 end
 
 group :development do
