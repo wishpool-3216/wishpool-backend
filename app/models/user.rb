@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
           :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  has_many :gifts
+
   def self.find_or_create_from_auth_hash(auth)
     user = where(provider: auth['provider'], uid: auth['uid']).first_or_create
     user.provider = auth['provider']
