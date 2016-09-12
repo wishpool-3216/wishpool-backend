@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
           :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  model_stamper
+
   has_many :gifts
 
   def self.find_or_create_from_auth_hash(auth)

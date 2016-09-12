@@ -5,4 +5,6 @@ class Contribution < ActiveRecord::Base
 
   validates :gift, :amount, presence: true
   validates :amount, numericality: { greater_than: 0 }
+
+  stampable
 end
