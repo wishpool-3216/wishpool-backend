@@ -46,3 +46,5 @@ bower.json
 .byebug_history
 
 bower_components
+
+coverage
