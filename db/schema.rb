@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20160912074252) do
   enable_extension "plpgsql"
 
   create_table "contributions", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "gift_id"
     t.float    "amount"
     t.datetime "created_at"
@@ -27,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160912074252) do
   end
 
   add_index "contributions", ["gift_id"], name: "index_contributions_on_gift_id", using: :btree
-  add_index "contributions", ["user_id"], name: "index_contributions_on_user_id", using: :btree
 
   create_table "gifts", force: :cascade do |t|
     t.string   "name"
@@ -91,7 +89,6 @@ ActiveRecord::Schema.define(version: 20160912074252) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "contributions", "gifts"
-  add_foreign_key "contributions", "users"
   add_foreign_key "gifts", "users", column: "recipient_id"
   add_foreign_key "notifications", "users"
 end
