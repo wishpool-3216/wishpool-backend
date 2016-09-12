@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
     birthday = Date.strptime(Koala::Facebook::API.new(oauth_token).get_object('me?fields=birthday')['birthday'], '%m/%d/%Y')
     update(birthday: birthday)
     birthday
+  rescue Koala::Facebook::AuthenticationError
+    # Don't do anything.
   end
 
   def get_friends_by_birthday
