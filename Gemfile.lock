@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/insphire/userstamp.git
-  revision: 44eae54cd7f035f45391d8ffd4bccee6daab781e
-  specs:
-    userstamp (2.0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,6 +30,9 @@ GEM
       activemodel (= 4.2.7.1)
       activesupport (= 4.2.7.1)
       arel (~> 6.0)
+    activerecord-userstamp (3.0.4)
+      activerecord (~> 4.2)
+      activesupport (~> 4.2)
     activesupport (4.2.7.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -217,6 +214,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-userstamp
   byebug
   coffee-rails (~> 4.1.0)
   devise_token_auth
@@ -233,7 +231,6 @@ DEPENDENCIES
   spring
   turbolinks
   uglifier (>= 1.3.0)
-  userstamp!
   web-console (~> 2.0)
 
 BUNDLED WITH
