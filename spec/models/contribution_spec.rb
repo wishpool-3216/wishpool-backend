@@ -20,4 +20,10 @@ describe Contribution do
     expect(Contribution.create(gift: g, amount: 0, creator: users(:user_one))).to_not be_valid
     expect(Contribution.create(gift: g, amount: 1.23, creator: users(:user_one))).to be_valid
   end
+
+  it 'has a contributor (aka creator)' do
+    g = create_gift
+    expect(Contribution.create(gift: g, amount: 1)).to_not be_valid
+    expect(Contribution.create(gift: g, amount: 1, creator: users(:user_one))).to be_valid
+  end
 end
