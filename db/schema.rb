@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907122942) do
+ActiveRecord::Schema.define(version: 20160912072844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,13 @@ ActiveRecord::Schema.define(version: 20160907122942) do
     t.datetime "updated_at"
     t.integer  "creator_id"
     t.integer  "updater_id"
+    t.integer  "publicity"
+    t.date     "expiry"
+    t.text     "description"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "gifts", ["recipient_id"], name: "index_gifts_on_recipient_id", using: :btree
@@ -53,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160907122942) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "birthday"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
