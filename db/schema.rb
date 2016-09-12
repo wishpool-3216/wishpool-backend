@@ -11,10 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912072844) do
+ActiveRecord::Schema.define(version: 20160912074252) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contributions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "gift_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "creator_id"
+    t.integer  "updater_id"
+  end
+
+  add_index "contributions", ["gift_id"], name: "index_contributions_on_gift_id", using: :btree
+  add_index "contributions", ["user_id"], name: "index_contributions_on_user_id", using: :btree
 
   create_table "gifts", force: :cascade do |t|
     t.string   "name"
@@ -34,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160912072844) do
   end
 
   add_index "gifts", ["recipient_id"], name: "index_gifts_on_recipient_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "read"
+    t.text    "message"
+    t.text    "link"
+  end
+
+  add_index "notifications", ["read"], name: "index_notifications_on_read", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -67,5 +90,8 @@ ActiveRecord::Schema.define(version: 20160912072844) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
+  add_foreign_key "contributions", "gifts"
+  add_foreign_key "contributions", "users"
   add_foreign_key "gifts", "users", column: "recipient_id"
+  add_foreign_key "notifications", "users"
 end
