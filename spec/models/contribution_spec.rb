@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 def create_gift
-  Gift.create!(recipient: users(:user_one), name: 'A Gift', creator: users(:user_one))
+  Gift.create!(recipient: users(:user_one), name: 'A Gift', creator: users(:user_one), publicity: 'Public')
 end
 
 describe Contribution do
