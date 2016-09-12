@@ -38,7 +38,7 @@ gem 'devise_token_auth'
 gem 'omniauth-facebook'
 
 # To track who created what
-gem 'userstamp', git: 'git://github.com/insphire/userstamp.git'
+gem 'activerecord-userstamp'
 
 # Image upload
 gem "paperclip", "~> 5.0.0"
