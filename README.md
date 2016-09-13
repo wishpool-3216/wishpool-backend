@@ -34,3 +34,9 @@ To run, just type `bundle exec rspec` from the root directory
 | GET | /auth/facebook/callback?callback=? | Call this after hitting `FB.login` to retrieve access token in the header to continue with your session. Will also return the associated User's details in JSON format (The callback=? is there to avoid CORS problems) |
 | GET | /api/v1/users/:id | Gets the User associated with the given ID |
 | PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
+||**GIFTS**||
+| GET | /api/v1/gifts/:id | Gets the gift data with the correct id |
+| GET | /api/v1/users/:user_id/gifts | Gets all the gifts that a particular user is receiving |
+| POST | /api/v1/users/:user_id/gifts | Creates a new gift for user (indicated by user\_id) to receive. Requires auth. Required params: {**name** (Name of Gift), **publicity** (Public / Private)}. Permitted params: { **expected\_price**, **expiry**, **description** } |
+| PATCH | /api/v1/gifts/:id | Updates the gift data with the relevant id. Permitted params: see above. Requires auth. |
+| DELETE | /api/v1/gifts/:id | Deletes the gift with the id. Requires auth. |
