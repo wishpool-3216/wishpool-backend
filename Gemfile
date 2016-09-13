@@ -37,6 +37,9 @@ gem 'puma'
 gem 'devise_token_auth'
 gem 'omniauth-facebook'
 
+# Facebook API
+gem "koala", "~> 2.2"
+
 # To track who created what
 gem 'activerecord-userstamp'
 
