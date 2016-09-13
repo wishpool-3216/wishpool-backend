@@ -10,7 +10,11 @@ Rails.application.routes.draw do
 
   scope '/api' do
     scope '/v1' do
-      resources :users, only: [:show, :update]
+      resources :users, only: [:show, :update] do
+        resources :gifts, only: [:index, :create]
+      end
+
+      resources :gifts, only: [:show, :update, :destroy]
     end
   end
 
