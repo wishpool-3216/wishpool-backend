@@ -31,7 +31,7 @@ To run, just type `bundle exec rspec` from the root directory
 |  | **USER** |  |
 | POST | /auth | **UNUSED** Creates a new account. Required params: { **user**, **password**, **password_confirmation**} |
 | POST | /auth/sign_in | **UNUSED** Signs in a user. Required params: { **email**, **password** }. Headers will contain **access-token**, **client** and **expiry** fields required for further use |
-| GET | /auth/facebook/callback?callback=? | Call this after hitting `FB.login` to retrieve access token in the header to continue with your session. Will also return the associated User's details in JSON format (The callback=? is there to avoid CORS problems) |
+| GET | /auth/facebook/callback | Call this after hitting `FB.login` to retrieve access token in the header to continue with your session. Will also return the associated User's details in JSON format. Required params: { **uid**, **access_token**, **expires\_in** } |
 | GET | /api/v1/users/:id | Gets the User associated with the given ID |
 | PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
 | GET | /api/v1/users/:id/friend_birthdays | Returns an array of users with their relevant information sorted by their birthdays in upcoming order |

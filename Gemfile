@@ -35,7 +35,7 @@ gem 'puma'
 
 # Auth methods
 gem 'devise_token_auth'
-gem 'omniauth-facebook'
+gem 'omniauth'
 
 # Facebook API
 gem "koala", "~> 2.2"
@@ -49,6 +49,9 @@ gem "paperclip", "~> 5.0.0"
 # Code Coverage
 gem 'simplecov', :require => false, :group => :test
 gem 'coveralls', require: false
+
+# HTTP Requests
+gem 'httparty'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

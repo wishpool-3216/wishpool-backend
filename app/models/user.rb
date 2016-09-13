@@ -17,13 +17,14 @@ class User < ActiveRecord::Base
   ##
   # Creates a User if there isn't one already in the database
   # Auth hash comes from Facebook (see SessionsController)
-  def self.find_or_create_from_auth_hash(auth)
-    user = where(provider: auth['provider'], uid: auth['uid']).first_or_create
-    user.provider = auth['provider']
-    user.uid = auth['uid']
-    user.name = auth['info']['name']
-    user.oauth_token = auth['credentials']['token']
-    user.oauth_expires_at = Time.at(auth['credentials']['expires_at'])
+  def self.find_or_create_from_auth_hash(provider, uid, access_token, expires_in)
+    user = where(provider: provider, uid: uid).first_or_create
+    user.provider = provider
+    user.uid = uid
+
+    # user.name = auth['info']['name']
+    user.oauth_token = access_token
+    user.oauth_expires_at = Time.at(expires_in.to_i)
     user.save!(validate: false)
     user
   end
