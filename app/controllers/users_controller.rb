@@ -24,6 +24,15 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  ##
+  # Gets the list of friends with birthdays in the system
+  # Returns an array of User objects with the keys
+  # +id+ (our system), +uid+ (facebook) and +birthday+
+  def friend_birthdays
+    @user = User.find(params[:id])
+    render json: @user.get_friends_by_birthday
+  end
+
   private
 
   ##
@@ -32,7 +41,7 @@ class UsersController < ApplicationController
     permit = [
       :email, :password, :password_confirmation,
       :image, :name, :nickname, :oauth_token,
-      :oauth_expires_at, :provider
+      :oauth_expires_at, :provider, :birthday
     ]
     params.permit(permit)
   end
