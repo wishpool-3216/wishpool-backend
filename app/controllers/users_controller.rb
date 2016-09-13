@@ -1,6 +1,6 @@
 # API for retrieving data about users
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: :update
+  before_action :authenticate_user!, only: [:update, :friend_birthdays]
 
   ##
   # Retrieves data of a single user
