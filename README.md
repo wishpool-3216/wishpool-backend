@@ -1,4 +1,4 @@
-# WishPool [![Build Status](https://travis-ci.org/wishpool-3216/wishpool-backend.svg?branch=master)](https://travis-ci.org/wishpool-3216/wishpool-backend)
+# WishPool [![Build Status](https://travis-ci.org/wishpool-3216/wishpool-backend.svg?branch=master)](https://travis-ci.org/wishpool-3216/wishpool-backend) [![Coverage Status](https://coveralls.io/repos/github/wishpool-3216/wishpool-backend/badge.svg?branch=master)](https://coveralls.io/github/wishpool-3216/wishpool-backend?branch=master)
 
 ## WishPool Thinking - Where Your Dreams Come True
 
