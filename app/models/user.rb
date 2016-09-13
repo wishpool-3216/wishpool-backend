@@ -35,12 +35,15 @@ class User < ActiveRecord::Base
   end
 
   def get_friends_by_birthday
-    sorted_by_date = Koala::Facebook::API.new(oauth_token).get_connections('me', 'friends?fields=name,birthday').
-                     select { |friend| friend['birthday'] }.
-                     each { |friend| friend['birthday'] = Date.strptime(friend['birthday'], '%m/%d/%Y') }.
-                     sort_by { |friend| friend['birthday'] }
+    friends = Koala::Facebook::API.new(oauth_token).get_connections('me', 'friends?uid').
+              map { |friend| friend['id'] }
+    user_friends = User.where(uid: friends)
+                     # select { |friend| friend['birthday'] }.
+                     # each { |friend| friend['birthday'] = Date.strptime(friend['birthday'], '%m/%d/%Y') }.
+                     # sort_by { |friend| friend['birthday'] }
     today = Date.today - Date.today.beginning_of_year
-    sorted_by_date.select { |friend| friend['birthday'] - friend['birthday'].beginning_of_year >= today } +
-      sorted_by_date.select { |friend| friend['birthday'] - friend['birthday'].beginning_of_year < today }
+    sorted_by_date = user_friends.sort_by { |friend| friend.birthday - friend.birthday.beginning_of_year }
+    sorted_by_date.select { |friend| friend.birthday - friend.birthday.beginning_of_year >= today } +
+      sorted_by_date.select { |friend| friend.birthday - friend.birthday.beginning_of_year < today }
   end
 end
