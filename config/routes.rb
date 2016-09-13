@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     scope '/v1' do
       resources :users, only: [:show, :update] do
         resources :gifts, only: [:index, :create]
+        get 'friend_birthdays', on: :member
       end
 
       resources :gifts, only: [:show, :update, :destroy]

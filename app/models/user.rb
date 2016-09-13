@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 
   after_create :get_birthday
 
+  ##
+  # Creates a User if there isn't one already in the database
+  # Auth hash comes from Facebook (see SessionsController)
   def self.find_or_create_from_auth_hash(auth)
     user = where(provider: auth['provider'], uid: auth['uid']).first_or_create
     user.provider = auth['provider']
@@ -25,6 +28,11 @@ class User < ActiveRecord::Base
     user
   end
 
+  ##
+  # On create, the user's birthday is stored in our system
+  # This allows us to provide the functionality of retrieving the user's friends' birthdays
+  # On failure (user somehow hides the birthday completely / UID is invalid), do nothing
+  # If a user's birthday is already in our system, returns it immediately
   def get_birthday
     return birthday if birthday
     birthday = Date.strptime(Koala::Facebook::API.new(oauth_token).get_object('me?fields=birthday')['birthday'], '%m/%d/%Y')
@@ -35,12 +43,17 @@ class User < ActiveRecord::Base
   end
 
   def get_friends_by_birthday
-    sorted_by_date = Koala::Facebook::API.new(oauth_token).get_connections('me', 'friends?fields=name,birthday').
-                     select { |friend| friend['birthday'] }.
-                     each { |friend| friend['birthday'] = Date.strptime(friend['birthday'], '%m/%d/%Y') }.
-                     sort_by { |friend| friend['birthday'] }
+    friends = Koala::Facebook::API.new(oauth_token).get_connections('me', 'friends?uid').
+              map { |friend| friend['id'] }
+    user_friends = User.where(uid: friends)
+                     # select { |friend| friend['birthday'] }.
+                     # each { |friend| friend['birthday'] = Date.strptime(friend['birthday'], '%m/%d/%Y') }.
+                     # sort_by { |friend| friend['birthday'] }
     today = Date.today - Date.today.beginning_of_year
-    sorted_by_date.select { |friend| friend['birthday'] - friend['birthday'].beginning_of_year >= today } +
-      sorted_by_date.select { |friend| friend['birthday'] - friend['birthday'].beginning_of_year < today }
+    sorted_by_date = user_friends.sort_by { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year }
+    sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year >= today } +
+      sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year < today }
+  rescue Koala::Facebook::AuthenticationError
+    [] # No Facebook = No friends. Sorry!
   end
 end
