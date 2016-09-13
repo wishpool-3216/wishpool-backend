@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
 
   model_stamper
 
-  has_many :gifts
+  has_many :gifts, foreign_key: :recipient_id
+  has_many :created_gifts, foreign_key: :creator_id, class_name: 'Gift'
 
   after_create :get_birthday
 
