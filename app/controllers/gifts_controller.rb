@@ -43,7 +43,7 @@ class GiftsController < ApplicationController
   private
 
   def gift_params
-    permit = [:name, :expected_price, :recipient_id, :publicity, :expiry,
+    permit = [:name, :expected_price, :publicity, :expiry,
               :description, :image_file_name, :image_content_type,
               :image_file_size, :image_updated_at]
     params.permit(permit)
