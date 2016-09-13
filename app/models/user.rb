@@ -53,5 +53,7 @@ class User < ActiveRecord::Base
     sorted_by_date = user_friends.sort_by { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year }
     sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year >= today } +
       sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year < today }
+  rescue Koala::Facebook::AuthenticationError
+    [] # No Facebook = No friends. Sorry!
   end
 end

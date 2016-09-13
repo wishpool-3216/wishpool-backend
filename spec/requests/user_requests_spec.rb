@@ -51,6 +51,13 @@ RSpec.describe 'User requests', type: :request do
 
   # Desperately need a way to test that OAuth sign_in returns auth headers
 
+  it 'should reject wrongly signed in users' do
+    wrong_user = User.create(email: 'a@b.com', password: 'password', password_confirmation: 'password')
+    user = users(:user_one)
+    get "/api/v1/users/#{wrong_user.id}/friend_birthdays", add_auth_to({}, user)
+    expect(response).to have_http_status(:forbidden)
+  end
+
   it 'returns the json representation of a user' do
     @user = users(:user_one)
     get "/api/v1/users/#{@user.id}"
@@ -73,7 +80,7 @@ RSpec.describe 'User requests', type: :request do
   it 'gets the birthdays of friends in the upcoming sort order' do
     # This test only verifies that the endpoint exists
     @user = users(:user_one)
-    get "/api/v1/users/#{@user.id}", add_auth_to({}, @user)
+    get "/api/v1/users/#{@user.id}/friend_birthdays", add_auth_to({}, @user)
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
   end
