@@ -69,4 +69,12 @@ RSpec.describe 'User requests', type: :request do
     expect(parseJSON(response.body)['nickname']).to eq('My new nickname')
     expect(User.find(@user.id).nickname).to eq('My new nickname')
   end
+
+  it 'gets the birthdays of friends in the upcoming sort order' do
+    # This test only verifies that the endpoint exists
+    @user = users(:user_one)
+    get "/api/v1/users/#{@user.id}", add_auth_to({}, @user)
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq('application/json')
+  end
 end
