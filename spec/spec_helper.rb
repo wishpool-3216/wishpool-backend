@@ -17,14 +17,7 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
 require 'coveralls'
-SimpleCov.formatter = Coveralls::SimpleCov::Formatter
-SimpleCov.start do
-  add_filter 'app/secrets'
-end
-
-SimpleCov.start 'rails'
 Coveralls.wear! 'rails'
 
 RSpec.configure do |config|
