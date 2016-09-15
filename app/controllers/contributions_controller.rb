@@ -2,13 +2,14 @@ class ContributionsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
   before_action :set_gift, only: [:index, :create]
   before_action :set_contribution, only: [:show, :update, :destroy]
+  before_action :check_permissions, only: [:update, :destroy]
 
   def index
     render json: @gift.contributions
   end
 
   def show
-    render json: @gift
+    render json: @contribution
   end
 
   def create
@@ -45,5 +46,10 @@ class ContributionsController < ApplicationController
 
   def set_contribution
     @contribution = Contribution.find(params[:id])
+  end
+
+  def check_permissions
+    return if current_user == @contribution.creator
+    render json: {}, status: :forbidden
   end
 end
