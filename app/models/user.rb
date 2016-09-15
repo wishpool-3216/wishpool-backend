@@ -55,14 +55,19 @@ class User < ActiveRecord::Base
     friends = Koala::Facebook::API.new(oauth_token).get_connections('me', 'friends?uid').
               map { |friend| friend['id'] }
     user_friends = User.where(uid: friends)
-                     # select { |friend| friend['birthday'] }.
-                     # each { |friend| friend['birthday'] = Date.strptime(friend['birthday'], '%m/%d/%Y') }.
-                     # sort_by { |friend| friend['birthday'] }
-    today = Date.today - Date.today.beginning_of_year
-    sorted_by_date = user_friends.sort_by { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year }
-    sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year >= today } +
-      sorted_by_date.select { |friend| friend.get_birthday - friend.get_birthday.beginning_of_year < today }
+    today = ordinal_date(Date.today)
+    sorted_by_date = user_friends.sort_by { |friend| ordinal_date(friend.birthday) }
+    sorted_by_date.select { |friend| ordinal_date(friend.birthday) >= today } +
+      sorted_by_date.select { |friend| ordinal_date(friend.birthday) < today }
   rescue Koala::Facebook::AuthenticationError
     [] # No Facebook = No friends. Sorry!
+  end
+
+  private
+
+  ##
+  # Returns the number of days between a given date and the beginning of the year
+  def ordinal_date(date)
+    date - date.beginning_of_year
   end
 end
