@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe User do
+RSpec.describe 'User' do
   PROVIDER = 'facebook'.freeze
   UID = '12345'.freeze
   OAUTH = '124424'.freeze
@@ -30,5 +30,11 @@ describe User do
 
   it 'should return the number of days between that day and 1st Jan' do
     expect(User.new.send(:ordinal_date, Date.today.beginning_of_year)).to eq(0)
+  end
+
+  it 'should not reveal the oauth key and the expiry when sent as json' do
+    user = FactoryGirl.create(:user)
+    expect(parseJSON(user.to_json)).to_not have_key('oauth_token')
+    expect(parseJSON(user.to_json)).to_not have_key('oauth_expires_at')
   end
 end

@@ -4,7 +4,7 @@ def create_gift
   Gift.create!(recipient: users(:user_one), name: 'A Gift', creator: users(:user_one), publicity: 'Public')
 end
 
-describe Contribution do
+RSpec.describe 'Contribution' do
   fixtures :users
 
   it 'belongs to a gift' do

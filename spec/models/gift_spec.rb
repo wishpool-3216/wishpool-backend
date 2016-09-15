@@ -9,7 +9,7 @@ def gift_params
   }
 end
 
-describe Gift do
+RSpec.describe 'Gift' do
   fixtures :users
 
   it 'requires a recipient' do
