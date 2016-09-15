@@ -67,4 +67,19 @@ RSpec.describe 'Gift Requests' do
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
   end
+
+  it 'should block non-related users from modifying gifts or deleting gifts' do
+    user = users(:user_one)
+    wrong_user = users(:user_two)
+    gift = create_gift_for(user)
+    patch "/api/v1/gifts/#{gift.id}", add_auth_to({ publicity: 'Public'}, wrong_user)
+    expect(response).to have_http_status(:forbidden)
+    expect(response.content_type).to eq('application/json')
+    expect(Gift.find(gift.id).publicity).to eq('Private')
+
+    delete "/api/v1/gifts/#{gift.id}", add_auth_to({}, wrong_user)
+    expect(response).to have_http_status(:forbidden)
+    expect(response.content_type).to eq('application/json')
+    expect(Gift.find(gift.id)).to_not eq(nil)
+  end
 end
