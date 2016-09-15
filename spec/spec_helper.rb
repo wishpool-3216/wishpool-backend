@@ -21,7 +21,7 @@ require 'simplecov'
 SimpleCov.start 'rails'
 
 require 'coveralls'
-Coveralls.wear!('rails')
+Coveralls.wear_merged!('rails')
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
