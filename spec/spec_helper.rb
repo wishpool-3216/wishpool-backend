@@ -18,10 +18,14 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
-SimpleCov.start 'rails'
-
 require 'coveralls'
-Coveralls.wear_merged!('rails')
+SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+SimpleCov.start do
+  add_filter 'app/secrets'
+end
+
+SimpleCov.start 'rails'
+Coveralls.wear! 'rails'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
