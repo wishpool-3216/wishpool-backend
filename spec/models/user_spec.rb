@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 describe User do
+  PROVIDER = 'facebook'.freeze
+  UID = '12345'.freeze
+  OAUTH = '124424'.freeze
+  EXPIRY = Time.new.freeze
   AUTH = [
-    'facebook',
-    '12345',
-    '16931248',
-    Time.new
+    PROVIDER, UID, OAUTH, EXPIRY
   ].freeze
 
   it 'should create a new user if one does not exist' do
     expect do
-      User.find_or_create_from_auth_hash(*AUTH)
+      @user = User.find_or_create_from_auth_hash(*AUTH)
     end.to change { User.count }.by(1)
+    expect(@user.oauth_token).to eq(OAUTH)
   end
 
   it 'should update the token of an existing user' do
@@ -25,4 +27,8 @@ describe User do
   end
 
   it 'should return a sorted array of users, with birthdays in ascending order'
+
+  it 'should return the number of days between that day and 1st Jan' do
+    expect(User.new.send(:ordinal_date, Date.today.beginning_of_year)).to eq(0)
+  end
 end
