@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   after_create :get_birthday
 
   ##
+  # Override the default to_json method
+  # This stops rendering users from showing the OAuth token and expiry
+  def to_json(options={})
+    options[:except] ||= [:oauth_token, :oauth_expires_at]
+    super(options)
+  end
+
+  ##
   # Creates a User if there isn't one already in the database
   # Auth hash comes from Facebook (see SessionsController)
   def self.find_or_create_from_auth_hash(provider, uid, access_token, expires_in)
