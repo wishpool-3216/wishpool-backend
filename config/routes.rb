@@ -15,7 +15,11 @@ Rails.application.routes.draw do
         get 'friend_birthdays', on: :member
       end
 
-      resources :gifts, only: [:show, :update, :destroy]
+      resources :gifts, only: [:show, :update, :destroy] do
+        resources :contributions, only: [:index, :create]
+      end
+
+      resources :contributions, only: [:show, :update, :destroy]
     end
   end
 

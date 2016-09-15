@@ -3,7 +3,7 @@ require 'rails_helper'
 ##
 # Contains Integration tests for the Users API
 RSpec.describe 'User requests', type: :request do
-  fixtures :users
+  fixtures :all
 
   it 'creates a new User' do
     expect do

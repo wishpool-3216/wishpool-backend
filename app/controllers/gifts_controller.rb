@@ -34,7 +34,7 @@ class GiftsController < ApplicationController
     Gift.transaction do
       @gift.destroy!
     end
-    render json: @gift
+    render json: {}
   end
 
   private

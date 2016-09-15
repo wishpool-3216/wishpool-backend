@@ -1,5 +1,6 @@
 class Gift < ActiveRecord::Base
   belongs_to :recipient, class_name: 'User'
+  has_many :contributions
 
   validates :recipient, :name, :creator,
             :publicity, presence: true

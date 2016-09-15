@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Gift Requests' do
-  fixtures :users
+  fixtures :all
 
   def gift_params(user)
     {
@@ -43,7 +43,7 @@ RSpec.describe 'Gift Requests' do
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
     expect(parseJSON(response.body).class).to eq(Array)
-    expect(parseJSON(response.body).length).to eq(1)
+    expect(parseJSON(response.body).length).to eq(user.gifts.length)
     # parseJSON called on both sides to ensure Date formatting is consistent
     expect(parseJSON(response.body).first).to eq(parseJSON(gift.to_json))
   end
