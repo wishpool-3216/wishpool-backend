@@ -47,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def reject_if_not_self
-    return unless current_user != @user
+    return if current_user == @user
     render json: {}, status: :forbidden
   end
 end

@@ -3,6 +3,8 @@
 
 class GiftsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :set_gift, only: [:show, :update, :destroy]
+  before_action :check_permissions, only: [:update, :destroy]
 
   def index
     @user = User.find(params[:user_id])
@@ -18,13 +20,10 @@ class GiftsController < ApplicationController
   end
 
   def show
-    @gift = Gift.find(params[:id])
     render json: @gift
   end
 
   def update
-    # TODO: Add more permissions here
-    @gift = Gift.find(params[:id])
     Gift.transaction do
       @gift.update!(gift_params)
     end
@@ -32,8 +31,6 @@ class GiftsController < ApplicationController
   end
 
   def destroy
-    # TODO: Add more permissions here
-    @gift = Gift.find(params[:id])
     Gift.transaction do
       @gift.destroy!
     end
@@ -47,5 +44,14 @@ class GiftsController < ApplicationController
               :description, :image_file_name, :image_content_type,
               :image_file_size, :image_updated_at]
     params.permit(permit)
+  end
+
+  def set_gift
+    @gift = Gift.find(params[:id])
+  end
+
+  def check_permissions
+    return if current_user == @gift.recipient || current_user == @gift.creator
+    render json: {}, status: :forbidden
   end
 end
