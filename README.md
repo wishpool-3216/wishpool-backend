@@ -41,3 +41,9 @@ To run, just type `bundle exec rspec` from the root directory
 | POST | /api/v1/users/:user_id/gifts | Creates a new gift for user (indicated by user\_id) to receive. Requires auth. Required params: {**name** (Name of Gift), **publicity** (Public / Private)}. Permitted params: { **expected\_price**, **expiry**, **description** } |
 | PATCH | /api/v1/gifts/:id | Updates the gift data with the relevant id. Permitted params: see above. Requires auth. |
 | DELETE | /api/v1/gifts/:id | Deletes the gift with the id. Requires auth. |
+||**CONTRIBUTIONS**||
+| GET | /api/v1/gifts/:gift_id/contributions | Returns all the contributions associated to a particular gift |
+| GET | /api/v1/contributions/:id | Returns the contribution with the particular id |
+| POST | /api/v1/gifts/:gift_id/contributions | Adds a new contribution to the gift given by **gift\_id**. Requires auth. Required params: { **amount** } |
+| PATCH | /api/v1/contributions/:id | Updates the contribution with the given id. Requires auth. Required params: { **amount** } |
+| DELETE | /api/v1/contributions/:id | Deletes the contribution with the given id. Requires auth. |
