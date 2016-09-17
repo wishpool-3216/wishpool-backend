@@ -37,6 +37,10 @@ RSpec.describe 'User requests', type: :request do
     expect(response.headers).to have_key('uid')
     expect(response.headers).to have_key('expiry')
     expect(response.headers).to have_key('token-type')
+    expect(response.headers).to have_key('Access-Control-Allow-Origin')
+    expect(response.headers).to have_key('Access-Control-Allow-Headers')
+    expect(response.headers).to have_key('Access-Control-Max-Age')
+    expect(response.headers).to have_key('Access-Control-Allow-Methods')
   end
 
   it 'fails to signs in a User' do
