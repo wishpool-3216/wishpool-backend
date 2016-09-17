@@ -14,6 +14,8 @@ class SessionsController < ApplicationController
     @user = User.find_or_create_from_auth_hash(params[:provider], params[:uid], params[:access_token], params[:expires_in])
     response.headers.merge! @user.create_new_auth_token
     render json: @user
+  rescue TypeError
+    render json: { error: 'An error has occured. Are you sure you asked for the correct permissions from the user?' }, status: 500
   end
 
   protected
