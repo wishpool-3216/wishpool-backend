@@ -29,10 +29,9 @@ class User < ActiveRecord::Base
     user = where(provider: provider, uid: uid).first_or_create
     user.provider = provider
     user.uid = uid
-
-    # user.name = auth['info']['name']
     user.oauth_token = access_token
     user.oauth_expires_at = Time.at(expires_in.to_i)
+    puts user.name = Koala::Facebook::API.new(access_token).get_object('me?fields=name')['name']
     user.save!(validate: false)
     user
   end
