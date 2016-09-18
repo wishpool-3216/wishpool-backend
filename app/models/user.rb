@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :created_gifts, foreign_key: :creator_id, class_name: 'Gift'
 
   after_create :get_birthday
+  after_create :get_name
 
   ##
   # Override the default to_json method
@@ -31,9 +32,18 @@ class User < ActiveRecord::Base
     user.uid = uid
     user.oauth_token = access_token
     user.oauth_expires_at = Time.at(expires_in.to_i)
-    puts user.name = Koala::Facebook::API.new(access_token).get_object('me?fields=name')['name']
     user.save!(validate: false)
     user
+  end
+
+  ##
+  # On create, the user's name is stored in our system
+  def get_name
+    name = Koala::Facebook::API.new(oauth_token).get_object('me?fields=name')['name']
+    update(name: name)
+    name
+  rescue Koala::Facebook::AuthenticationError
+    # Do nothing.
   end
 
   ##
