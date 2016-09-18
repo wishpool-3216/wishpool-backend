@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match '*all' => 'application#cor', via: :options
+
   post '/auth/:provider/callback', to: 'sessions#create'
 
   mount_devise_token_auth_for 'User', at: 'auth'

@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Headers'] = ['Origin, Content-Type, Accept, Authorization, access-token, bearer, uid, expiry, client']
     headers['Access-Control-Max-Age'] = "1728000"
   end
+
+  def cor
+    render text: ''
+  end
 end
