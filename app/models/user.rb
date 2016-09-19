@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :gifts, foreign_key: :recipient_id
   has_many :created_gifts, foreign_key: :creator_id, class_name: 'Gift'
+  has_many :contributions, foreign_key: :creator_id
+  has_many :gifts_contributing, through: :contributions, source: :gift
 
   after_create :get_birthday
   after_create :get_name
