@@ -29,6 +29,20 @@ class UsersController < ApplicationController
     render json: @user.get_friends_by_birthday
   end
 
+  ##
+  # Gets the contributions a particular user has made to gifts
+  # GET '/api/v1/users/:id/contributions_made'
+  def contributions_made
+    render json: @user.contributions
+  end
+
+  ##
+  # Gets the gifts that a user is contributing to
+  # GET '/api/v1/users/:id/gifts_contributing'
+  def gifts_contributing
+    render json: @user.gifts_contributing
+  end
+
   private
 
   ##
