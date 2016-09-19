@@ -88,4 +88,22 @@ RSpec.describe 'User requests', type: :request do
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
   end
+
+  it 'gets the contributions a user has made' do
+    @contribution = FactoryGirl.create(:contribution)
+    user = @contribution.creator
+    get "/api/v1/users/#{user.id}/contributions_made"
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq('application/json')
+    expect(response.body).to eq([@contribution].to_json)
+  end
+
+  it 'gets the gifts a user is contributing to' do
+    @contribution = FactoryGirl.create(:contribution)
+    user = @contribution.creator
+    get "/api/v1/users/#{user.id}/gifts_contributing"
+    expect(response).to have_http_status(:ok)
+    expect(response.content_type).to eq('application/json')
+    expect(response.body).to eq([@contribution.gift].to_json)
+  end
 end
