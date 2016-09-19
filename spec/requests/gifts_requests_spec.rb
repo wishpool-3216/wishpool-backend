@@ -45,7 +45,8 @@ RSpec.describe 'Gift Requests' do
     expect(parseJSON(response.body).class).to eq(Array)
     expect(parseJSON(response.body).length).to eq(user.gifts.length)
     # parseJSON called on both sides to ensure Date formatting is consistent
-    expect(parseJSON(response.body).first).to eq(parseJSON(gift.to_json))
+    # serializable_hash used here instaed of to_json because it was called as a collection, so no include :whatever is called
+    expect(parseJSON(response.body).first).to eq(parseJSON(gift.serializable_hash.to_json))
   end
 
   it 'should be able to change the status of a gift' do

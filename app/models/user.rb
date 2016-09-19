@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
   ##
   # This one is called within association calls.
   # No need to dump in all the nested stuff!
-  def serializable_hash(options = {})
+  def serializable_hash(options = nil)
+    options ||= {} # Following Rails implementation
     options[:except] ||= [:oauth_token, :oauth_expires_at]
     super(options)
   end
