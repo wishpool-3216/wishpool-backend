@@ -36,6 +36,8 @@ To run, just type `bundle exec rspec` from the root directory
 | GET | /api/v1/users/:id | Gets the User associated with the given ID. Also yields an array gifts which contains the gifts that this user is **receiving** |
 | PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
 | GET | /api/v1/users/:id/friend_birthdays | Returns an array of users with their relevant information sorted by their birthdays in upcoming order |
+| GET | /api/v1/users/:id/contributions_made | Returns an array of the contributions which the user has made |
+| GET | /api/v1/userse/:id/gifts_contributing | Returns an array of the gifts which the user is contributing to |
 ||**GIFTS**||
 | GET | /api/v1/gifts/:id | Gets the gift data with the correct id |
 | GET | /api/v1/users/:user_id/gifts | Gets all the gifts that a particular user is receiving |
