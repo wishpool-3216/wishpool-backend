@@ -68,6 +68,7 @@ RSpec.describe 'User requests', type: :request do
     expect(response).to have_http_status(:ok)
     expect(response.content_type).to eq('application/json')
     expect(response.body).to eq(@user.to_json)
+    expect(parseJSON(response.body)).to have_key('gifts')
   end
 
   it 'updates an attribute of a user, in this case the nickname' do

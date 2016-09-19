@@ -20,7 +20,17 @@ class User < ActiveRecord::Base
   ##
   # Override the default to_json method
   # This stops rendering users from showing the OAuth token and expiry
-  def to_json(options={})
+  def to_json(options = {})
+    options[:except] ||= [:oauth_token, :oauth_expires_at]
+    options[:include] ||= [:gifts]
+    super(options)
+  end
+
+  ##
+  # This one is called within association calls.
+  # No need to dump in all the nested stuff!
+  def serializable_hash(options = nil)
+    options ||= {} # Following Rails implementation
     options[:except] ||= [:oauth_token, :oauth_expires_at]
     super(options)
   end
