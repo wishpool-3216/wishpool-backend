@@ -33,7 +33,7 @@ To run, just type `bundle exec rspec` from the root directory
 | POST | /auth/sign_in | **UNUSED** Signs in a user. Required params: { **email**, **password** }. Headers will contain **access-token**, **client** and **expiry** fields required for further use |
 | POST | /auth/facebook/callback | Call this after hitting `FB.login` to retrieve access token in the header to continue with your session. Will also return the associated User's details in JSON format. Required params: { **uid**, **access_token**, **expires\_in** }. Note that a a minimum, you **must** include user\_birthday and user\_friends scopes |
 | DELETE | /auth/sign_out | Invalidates a user's token. Requires auth. |
-| GET | /api/v1/users/:id | Gets the User associated with the given ID |
+| GET | /api/v1/users/:id | Gets the User associated with the given ID. Also yields an array gifts which contains the gifts that this user is **receiving** |
 | PATCH | /api/v1/users/:id | Updates the User associated with the given ID |
 | GET | /api/v1/users/:id/friend_birthdays | Returns an array of users with their relevant information sorted by their birthdays in upcoming order |
 ||**GIFTS**||
