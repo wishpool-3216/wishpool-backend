@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Allow-Methods'] = ['GET, POST, PATCH, DELETE']
     headers['Access-Control-Allow-Headers'] = ['Origin, Content-Type, Accept, Authorization, access-token, bearer, uid, expiry, client, If-Modified-Since']
     headers['Access-Control-Max-Age'] = "1728000"
+    headers['Access-Control-Expose-Headers'] = ['access-token, token-type, client, expiry, uid']
   end
 
   def cor
