@@ -1,9 +1,11 @@
 class Gift < ActiveRecord::Base
   belongs_to :recipient, class_name: 'User'
-  has_many :contributions
+  has_many :contributions, dependent: :destroy
 
   validates :recipient, :name, :creator,
             :publicity, presence: true
+
+  alias_attribute :giver, :creator
 
   ##
   # The publicity status of a gift
@@ -16,4 +18,9 @@ class Gift < ActiveRecord::Base
   }
 
   stampable
+
+  def to_json(options = {})
+    options[:include] ||= [:recipient, :contributions]
+    super(options)
+  end
 end
