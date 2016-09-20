@@ -21,6 +21,11 @@ class Gift < ActiveRecord::Base
 
   def to_json(options = {})
     options[:include] ||= [:recipient, :contributions]
+    options[:methods] ||= [:sum_contributions]
     super(options)
+  end
+
+  def sum_contributions
+    contributions.pluck(:amount).sum
   end
 end

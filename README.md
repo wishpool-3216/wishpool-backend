@@ -63,7 +63,7 @@ All DateTimes are formatted YYYY-MM-DDThh:mm:ss:sTZD
 | GET | /api/v1/users/:id/contributions_made | Returns an array of the contributions which the user has made | [ {`contribution_columns`}, ... ] |
 | GET | /api/v1/userse/:id/gifts_contributing | Returns an array of the gifts which the user is contributing to | [{`gift_columns`}, ...] |
 ||**GIFTS**|| |
-| GET | /api/v1/gifts/:id | Gets the gift data with the correct id | {`gift_columns`, `contributions`: [{`contribution_columns`},...], `recipient`: {`user_columns`} } |
+| GET | /api/v1/gifts/:id | Gets the gift data with the correct id | {`gift_columns`, `sum_contributions`, `contributions`: [{`contribution_columns`},...], `recipient`: {`user_columns`} } |
 | GET | /api/v1/users/:user_id/gifts | Gets all the gifts that a particular user is receiving | [{`gift_columns`}, ...] |
 | POST | /api/v1/users/:user_id/gifts | Creates a new gift for user (indicated by user\_id) to receive. Requires auth. Required params: {**name** (Name of Gift), **publicity** (Public / Private)}. Permitted params: { **expected\_price**, **expiry**, **description** } | |
 | PATCH | /api/v1/gifts/:id | Updates the gift data with the relevant id. Permitted params: see above. Requires auth. | |
