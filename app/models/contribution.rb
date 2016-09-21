@@ -13,4 +13,10 @@ class Contribution < ActiveRecord::Base
     options[:include] ||= [:gift, :contributor]
     super(options)
   end
+
+  def serializable_hash(options = nil)
+    options ||= {}
+    options[:include] ||= [:contributor]
+    super(options)
+  end
 end
