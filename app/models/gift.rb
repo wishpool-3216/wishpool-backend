@@ -25,6 +25,12 @@ class Gift < ActiveRecord::Base
     super(options)
   end
 
+  def serializable_hash(options = nil)
+    options ||= {}
+    options[:methods] ||= [:sum_contributions]
+    super(options)
+  end
+
   def sum_contributions
     contributions.pluck(:amount).sum
   end
