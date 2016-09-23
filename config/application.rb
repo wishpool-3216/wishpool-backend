@@ -28,7 +28,8 @@ module Wishpool
         origins '*'
         resource '*',
           :headers => ['Origin, Content-Type, Accept, Authorization, access-token, bearer, uid, expiry, client, If-Modified-Since, token-type'],
-          :methods => ['GET, POST, PATCH, DELETE']
+          :methods => [:get, :post, :patch, :delete, :options],
+          :expose => ['access-token, client, expiry, uid, token-type']
       end
     end
   end
