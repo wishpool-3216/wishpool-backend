@@ -133,6 +133,7 @@ GEM
     pkg-config (1.1.7)
     puma (3.6.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)
@@ -243,6 +244,7 @@ DEPENDENCIES
   paperclip (~> 5.0.0)
   pg
   puma
+  rack-cors
   rails (= 4.2.7.1)
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
