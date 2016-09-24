@@ -5,6 +5,7 @@ class Gift < ActiveRecord::Base
   validates :recipient, :name, :creator,
             :publicity, presence: true
   validates :expected_price, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
+  validate :valid_expiry_date, on: :create
 
   alias_attribute :giver, :creator
 
@@ -30,6 +31,10 @@ class Gift < ActiveRecord::Base
     options ||= {}
     options[:methods] ||= [:sum_contributions]
     super(options)
+  end
+
+  def valid_expiry_date
+    errors.add(:expiry, 'must be after today') if expiry && expiry > Date.today
   end
 
   def sum_contributions
