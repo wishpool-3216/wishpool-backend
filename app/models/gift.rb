@@ -34,7 +34,7 @@ class Gift < ActiveRecord::Base
   end
 
   def valid_expiry_date
-    errors.add(:expiry, 'must be after today') if expiry && expiry > Date.today
+    errors.add(:expiry, 'must be after today') if expiry && expiry < Date.today
   end
 
   def sum_contributions
