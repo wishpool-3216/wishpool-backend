@@ -4,6 +4,7 @@ class Gift < ActiveRecord::Base
 
   validates :recipient, :name, :creator,
             :publicity, presence: true
+  validates :expected_price, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   alias_attribute :giver, :creator
 
